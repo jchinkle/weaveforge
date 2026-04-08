@@ -1,0 +1,34 @@
+## Title: WeaveForge — Weaving Coach
+## Description: Real-time light attack weaving trainer with rhythm visualization, streak tracking, per-skill accuracy breakdowns, and long-term progress history.
+## Author: WeaveForge Team
+## Version: 1.0.0
+## AddOnVersion: 100
+## APIVersion: 101049
+## SavedVariables: WeaveForge_Data
+## OptionalDependsOn: LibAddonMenu-2.0
+
+; Localization (loaded first, establishes global namespace)
+localization/en.lua
+localization/de.lua
+localization/fr.lua
+localization/ru.lua
+
+; Core modules (depend on localization and constants)
+core/Constants.lua
+core/WeaveEngine.lua
+core/FightRecorder.lua
+core/HistoryManager.lua
+
+; UI elements (depend on core modules)
+ui/RhythmBar.lua
+ui/StreakCounter.lua
+ui/MissedWeaveAlert.lua
+ui/FightSummaryPanel.lua
+ui/HistoryPanel.lua
+ui/PracticeModeOverlay.lua
+
+; Settings panel (depends on all modules)
+settings/Settings.lua
+
+; Main entry point (wires everything together, loaded last)
+WeaveForge.lua
