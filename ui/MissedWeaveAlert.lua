@@ -125,10 +125,31 @@ end
 ---------------------------------------------------------------------------
 -- Register for WeaveEngine callbacks
 ---------------------------------------------------------------------------
+local lastHintTime = 0
+
 function MissedWeaveAlert:RegisterCallbacks()
     CALLBACK_MANAGER:RegisterCallback(WF.EVENT_WEAVE_MISS, function(abilityId, slotIndex, gapMs)
         self:ShowAlert()
+        self:ShowOnboardingHint()
     end)
+end
+
+---------------------------------------------------------------------------
+-- Onboarding hint (fires max 3 times ever, with 10s cooldown between)
+---------------------------------------------------------------------------
+function MissedWeaveAlert:ShowOnboardingHint()
+    if not settings or not settings.onboarding then return end
+    local ob = settings.onboarding
+    if ob.hintMissedWeaveCount >= ob.hintMaxPerType then return end
+
+    local now = GetGameTimeMilliseconds()
+    if now - lastHintTime < 10000 then return end
+    lastHintTime = now
+
+    ob.hintMissedWeaveCount = ob.hintMissedWeaveCount + 1
+    if CHAT_SYSTEM then
+        CHAT_SYSTEM:AddMessage(L.CHAT_PREFIX .. L.HINT_MISSED_WEAVE)
+    end
 end
 
 ---------------------------------------------------------------------------

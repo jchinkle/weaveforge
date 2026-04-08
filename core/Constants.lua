@@ -211,6 +211,7 @@ WF.ACCOUNT_DEFAULTS = {
     enableInPvP         = false,
     combatOnly          = true,
     fadeDelay           = 2,
+    firstRunDone        = false,
 
     -- Missed Weave Detector
     missedAlert = {
@@ -262,10 +263,26 @@ WF.ACCOUNT_DEFAULTS = {
         showGhostBar    = false,
     },
 
+    -- Action Coach
+    actionCoach = {
+        enabled     = true,
+        fontSize    = 22,
+        unlocked    = false,
+        offsetX     = 0,
+        offsetY     = 50,
+    },
+
     -- Advanced
     advanced = {
         customLAIds     = "",
         debugMode       = false,
+    },
+
+    -- Onboarding hint tracking
+    onboarding = {
+        hintMissedWeaveCount   = 0,
+        hintStreakSuccessCount  = 0,
+        hintMaxPerType         = 3,
     },
 }
 

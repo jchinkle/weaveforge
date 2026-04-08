@@ -23,6 +23,7 @@ core/HistoryManager.lua
 ui/RhythmBar.lua
 ui/StreakCounter.lua
 ui/MissedWeaveAlert.lua
+ui/ActionCoach.lua
 ui/FightSummaryPanel.lua
 ui/HistoryPanel.lua
 ui/PracticeModeOverlay.lua

@@ -315,6 +315,51 @@ function Settings:Initialize(accountSV)
     }
 
     -- =====================================================================
+    -- Action Coach Section
+    -- =====================================================================
+    optionsData[#optionsData + 1] = {
+        type = "header",
+        name = L.SETTINGS_COACH,
+    }
+
+    optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = L.SETTINGS_COACH_ENABLE,
+        tooltip = L.SETTINGS_COACH_ENABLE_TT,
+        getFunc = function() return sv.actionCoach.enabled end,
+        setFunc = function(value)
+            WF.ActionCoach:SetEnabled(value)
+        end,
+        default = WF.ACCOUNT_DEFAULTS.actionCoach.enabled,
+    }
+
+    optionsData[#optionsData + 1] = {
+        type = "slider",
+        name = L.SETTINGS_COACH_FONTSIZE,
+        min = 14,
+        max = 36,
+        step = 2,
+        getFunc = function() return sv.actionCoach.fontSize end,
+        setFunc = function(value)
+            sv.actionCoach.fontSize = value
+            WF.ActionCoach:UpdateFontSize()
+        end,
+        default = WF.ACCOUNT_DEFAULTS.actionCoach.fontSize,
+    }
+
+    optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = L.SETTINGS_COACH_UNLOCK,
+        tooltip = L.SETTINGS_COACH_UNLOCK_TT,
+        getFunc = function() return sv.actionCoach.unlocked end,
+        setFunc = function(value)
+            sv.actionCoach.unlocked = value
+            WF.ActionCoach:UpdateMovable()
+        end,
+        default = WF.ACCOUNT_DEFAULTS.actionCoach.unlocked,
+    }
+
+    -- =====================================================================
     -- Fight Summary Section
     -- =====================================================================
     optionsData[#optionsData + 1] = {

@@ -7,6 +7,26 @@ local WF = WeaveForge
 local L  = WF.L
 
 ---------------------------------------------------------------------------
+-- Help text (extracted so /wf help and unknown commands both use it)
+---------------------------------------------------------------------------
+local function ShowHelp()
+    CHAT_SYSTEM:AddMessage(L.CHAT_PREFIX .. L.HELP_HEADER)
+    CHAT_SYSTEM:AddMessage(L.CHAT_PREFIX .. L.HELP_WHAT_IS_WEAVING)
+    CHAT_SYSTEM:AddMessage(L.CHAT_PREFIX .. L.HELP_HOW_TO_WEAVE)
+    CHAT_SYSTEM:AddMessage(L.CHAT_PREFIX .. L.HELP_BAR_EXPLANATION)
+    CHAT_SYSTEM:AddMessage(L.CHAT_PREFIX .. L.HELP_STREAK_EXPLANATION)
+    CHAT_SYSTEM:AddMessage(L.CHAT_PREFIX .. L.HELP_COMMANDS_HEADER)
+    CHAT_SYSTEM:AddMessage("  /wf          - Toggle fight summary")
+    CHAT_SYSTEM:AddMessage("  /wf on|off   - Enable or disable WeaveForge")
+    CHAT_SYSTEM:AddMessage("  /wf reset    - Reset session stats")
+    CHAT_SYSTEM:AddMessage("  /wf history  - Toggle fight history panel")
+    CHAT_SYSTEM:AddMessage("  /wf settings - Open settings")
+    CHAT_SYSTEM:AddMessage("  /wf practice - Toggle practice mode")
+    CHAT_SYSTEM:AddMessage("  /wf streak   - Show best streak")
+    CHAT_SYSTEM:AddMessage("  /wf help     - Show this help")
+end
+
+---------------------------------------------------------------------------
 -- Addon Loaded Handler
 ---------------------------------------------------------------------------
 local function OnAddonLoaded(eventCode, addonName)
@@ -39,6 +59,7 @@ local function OnAddonLoaded(eventCode, addonName)
     WF.RhythmBar:Initialize(accountSV)
     WF.StreakCounter:Initialize(accountSV, characterSV)
     WF.MissedWeaveAlert:Initialize(accountSV)
+    WF.ActionCoach:Initialize(accountSV)
     WF.FightSummaryPanel:Initialize(accountSV)
     WF.HistoryPanel:Initialize(accountSV)
     WF.PracticeModeOverlay:Initialize(accountSV)
@@ -54,11 +75,37 @@ local function OnAddonLoaded(eventCode, addonName)
     -- 7. Register slash commands
     WF:RegisterSlashCommands()
 
-    -- Startup complete
+    -- 8. Register onboarding hint for streak success
+    CALLBACK_MANAGER:RegisterCallback(WF.EVENT_WEAVE_SUCCESS, function(streak)
+        if streak == 5 then
+            local ob = accountSV.onboarding
+            if ob and ob.hintStreakSuccessCount < ob.hintMaxPerType then
+                ob.hintStreakSuccessCount = ob.hintStreakSuccessCount + 1
+                if CHAT_SYSTEM then
+                    CHAT_SYSTEM:AddMessage(L.CHAT_PREFIX .. L.HINT_STREAK_SUCCESS)
+                end
+            end
+        end
+    end)
+
+    -- Startup message
     if CHAT_SYSTEM and accountSV.enabled then
         CHAT_SYSTEM:AddMessage(
             L.CHAT_PREFIX .. L.ADDON_NAME .. " v" .. WF.ADDON_VERSION .. " loaded."
         )
+    end
+
+    -- 9. First-run welcome (once per account, delayed so it's visible)
+    if not accountSV.firstRunDone then
+        accountSV.firstRunDone = true
+        zo_callLater(function()
+            if CHAT_SYSTEM then
+                CHAT_SYSTEM:AddMessage(L.CHAT_PREFIX .. L.WELCOME_LINE_1)
+                CHAT_SYSTEM:AddMessage(L.CHAT_PREFIX .. L.WELCOME_LINE_2)
+                CHAT_SYSTEM:AddMessage(L.CHAT_PREFIX .. L.WELCOME_LINE_3)
+                CHAT_SYSTEM:AddMessage(L.CHAT_PREFIX .. L.WELCOME_LINE_4)
+            end
+        end, 2000)
     end
 end
 
@@ -104,18 +151,11 @@ function WF:RegisterSlashCommands()
         elseif cmd == "debugla" then
             WF.WeaveEngine:ToggleDebugMode()
 
+        elseif cmd == "help" then
+            ShowHelp()
+
         else
-            -- Unknown command - show help
-            CHAT_SYSTEM:AddMessage(L.CHAT_PREFIX .. "Usage:")
-            CHAT_SYSTEM:AddMessage("  /wf          - Toggle fight summary")
-            CHAT_SYSTEM:AddMessage("  /wf on       - Enable WeaveForge")
-            CHAT_SYSTEM:AddMessage("  /wf off      - Disable WeaveForge")
-            CHAT_SYSTEM:AddMessage("  /wf reset    - Reset session stats")
-            CHAT_SYSTEM:AddMessage("  /wf history  - Toggle history panel")
-            CHAT_SYSTEM:AddMessage("  /wf settings - Open settings")
-            CHAT_SYSTEM:AddMessage("  /wf practice - Toggle practice mode")
-            CHAT_SYSTEM:AddMessage("  /wf streak   - Show best streak")
-            CHAT_SYSTEM:AddMessage("  /wf debugla  - Toggle debug mode")
+            ShowHelp()
         end
     end
 end

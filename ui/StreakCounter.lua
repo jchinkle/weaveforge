@@ -58,9 +58,17 @@ function StreakCounter:CreateUI()
         settings.streakCounter.offsetY = offsetY
     end)
 
+    -- "Weave Streak" title label (small, above the counter)
+    local titleLabel = WINDOW_MANAGER:CreateControl("$(parent)Title", tlw, CT_LABEL)
+    titleLabel:SetAnchor(TOP, tlw, TOP, 0, 0)
+    titleLabel:SetFont(string.format("$(MEDIUM_FONT)|%d|soft-shadow-thin", math.max(10, fontSize - 8)))
+    titleLabel:SetColor(0.6, 0.6, 0.6, 0.7)
+    titleLabel:SetText(L.LABEL_WEAVE_STREAK)
+    titleLabel:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
+
     -- Main streak number
     streakLabel = WINDOW_MANAGER:CreateControl("$(parent)Streak", tlw, CT_LABEL)
-    streakLabel:SetAnchor(CENTER, tlw, CENTER, 0, -5)
+    streakLabel:SetAnchor(CENTER, tlw, CENTER, 0, 2)
     streakLabel:SetFont(string.format("$(BOLD_FONT)|%d|soft-shadow-thick", fontSize))
     streakLabel:SetColor(1, 0.84, 0, 1)  -- gold
     streakLabel:SetText("0")

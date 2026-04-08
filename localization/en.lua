@@ -193,4 +193,39 @@ WeaveForge.L = {
     -- Time formatting
     TIME_FORMAT_SHORT           = "%dm %ds",
     TIME_FORMAT_SECONDS         = "%ds",
+
+    -- Action Coach prompts
+    COACH_LIGHT_ATTACK          = "Light Attack!",
+    COACH_CAST_SKILL            = "Cast Skill!",
+    COACH_CAST_SKILL_NOW        = "Cast Skill NOW!",
+    COACH_CHARGING              = "Charging...",
+
+    -- Onboarding: first-run welcome
+    WELCOME_LINE_1              = "Welcome to WeaveForge! This addon coaches you on light attack weaving.",
+    WELCOME_LINE_2              = "Weaving = tap light attack BEFORE each skill. This can boost your DPS by 20-40%.",
+    WELCOME_LINE_3              = "The prompt near your crosshair tells you what to do: Light Attack -> Cast Skill -> repeat!",
+    WELCOME_LINE_4              = "Type /wf help for commands, or /wf settings to customize.",
+
+    -- Onboarding: contextual hints
+    HINT_MISSED_WEAVE           = "Tip: That red flash means you cast a skill without a light attack first. Try: light attack -> skill -> light attack -> skill!",
+    HINT_STREAK_SUCCESS         = "Nice! You're weaving! Keep that rhythm: light attack, skill, light attack, skill.",
+
+    -- UI labels
+    LABEL_WEAVE_STREAK          = "Weave Streak",
+
+    -- Improved /wf help
+    HELP_HEADER                 = "--- WeaveForge Help ---",
+    HELP_WHAT_IS_WEAVING        = "Weaving = fit a light attack before every skill cast to maximize DPS.",
+    HELP_HOW_TO_WEAVE           = "The rhythm: Light Attack -> Skill -> Light Attack -> Skill -> repeat. The prompt near your crosshair guides you!",
+    HELP_BAR_EXPLANATION        = "The bar fills after each light attack. Cast your skill while it's green.",
+    HELP_STREAK_EXPLANATION     = "The streak counter tracks consecutive perfect weaves. Miss one and it resets.",
+    HELP_COMMANDS_HEADER        = "Commands:",
+
+    -- Settings: Action Coach section
+    SETTINGS_COACH              = "Action Coach",
+    SETTINGS_COACH_ENABLE       = "Enable Action Coach",
+    SETTINGS_COACH_ENABLE_TT    = "Show a real-time prompt telling you when to light attack and when to cast a skill.",
+    SETTINGS_COACH_FONTSIZE     = "Prompt Font Size",
+    SETTINGS_COACH_UNLOCK       = "Unlock Position",
+    SETTINGS_COACH_UNLOCK_TT    = "Allow dragging the action coach prompt to reposition it.",
 }
