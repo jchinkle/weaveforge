@@ -15,7 +15,7 @@ WF.SAVED_VARS_VER   = 1
 -- GCD and timing constants
 ---------------------------------------------------------------------------
 WF.GCD_MS               = 1000     -- Base global cooldown in milliseconds
-WF.DEFAULT_DETECT_WINDOW = 1000    -- Max ms between LA and skill to count as weave
+WF.DEFAULT_DETECT_WINDOW = 1100    -- Max ms between LA and skill to count as weave
 WF.BAR_SWAP_GRACE_MS    = 300      -- Grace period after bar swap (suppress miss detection)
 WF.COMBAT_END_DELAY_MS  = 3000     -- Delay before finalizing fight after combat ends
 WF.FADE_DELAY_DEFAULT   = 2        -- Seconds to keep UI visible after combat ends
@@ -218,7 +218,7 @@ WF.ACCOUNT_DEFAULTS = {
         enabled         = true,
         style           = 1,        -- ALERT_STYLE.ICON_FLASH
         sound           = 1,        -- ALERT_SOUND.NONE
-        detectionWindow = 1000,     -- ms
+        detectionWindow = 1100,     -- ms
         ignoreBarSwap   = true,
         ignoreHeavy     = true,
     },

@@ -200,6 +200,12 @@ WeaveForge.L = {
     COACH_CAST_SKILL_NOW        = "Cast Skill NOW!",
     COACH_CHARGING              = "Charging...",
 
+    -- Action Coach timing feedback
+    COACH_FEEDBACK_GOOD         = "Good! %dms",
+    COACH_FEEDBACK_PERFECT      = "Perfect! %dms",
+    COACH_FEEDBACK_SLOW         = "Too slow! %dms (need <%dms)",
+    COACH_FEEDBACK_NO_LA        = "No LA detected! Tap light attack first",
+
     -- Onboarding: first-run welcome
     WELCOME_LINE_1              = "Welcome to WeaveForge! This addon coaches you on light attack weaving.",
     WELCOME_LINE_2              = "Weaving = tap light attack BEFORE each skill. This can boost your DPS by 20-40%.",
